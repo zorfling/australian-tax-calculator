@@ -17,7 +17,7 @@ const coefficients: TaxFormulaCoefficientsYear = {
     { weeklyEarningsMax: 1282, a: 0.3477, b: 165.4423 },
     { weeklyEarningsMax: 1730, a: 0.345, b: 161.9808 },
     { weeklyEarningsMax: 3461, a: 0.39, b: 239.8654 },
-    { weeklyEarningsMax: 9999999, a: 0.47, b: 516.7885 }
+    { weeklyEarningsMax: 9999999, a: 0.47, b: 516.7885 },
   ],
   2021: [
     { weeklyEarningsMax: 359, a: 0, b: 0 },
@@ -28,14 +28,14 @@ const coefficients: TaxFormulaCoefficientsYear = {
     { weeklyEarningsMax: 1282, a: 0.3477, b: 186.2119 },
     { weeklyEarningsMax: 2307, a: 0.345, b: 182.7504 },
     { weeklyEarningsMax: 3461, a: 0.39, b: 286.5965 },
-    { weeklyEarningsMax: 9999999, a: 0.47, b: 563.5196 }
-  ]
+    { weeklyEarningsMax: 9999999, a: 0.47, b: 563.5196 },
+  ],
 };
 
 const calculateTax = (parsedIncome: number, taxYearEnding: number) => {
   const weeklyIncome = Math.trunc(parsedIncome / 52) + 0.99;
   const { a, b } = coefficients[taxYearEnding].find(
-    (elem) => elem.weeklyEarningsMax > weeklyIncome
+    elem => elem.weeklyEarningsMax > weeklyIncome
   ) || { a: 0, b: 0 };
 
   const weeklyResult = Math.round(a * weeklyIncome - b);
